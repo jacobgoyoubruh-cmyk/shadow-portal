@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shadow</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #0b1020;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+main {
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+}
+h1 { font-size: 52px; margin-bottom: 8px; }
+h1 span { color: #818cf8; }
+p { color: #aab2c8; }
+form { display: flex; gap: 8px; margin-top: 28px; }
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid #303952;
+  border-radius: 12px;
+  background: #171e31;
+  color: white;
+}
+button {
+  padding: 0 20px;
+  border: 0;
+  border-radius: 12px;
+  background: #6366f1;
+  color: white;
+  cursor: pointer;
+}
+small { display: block; margin-top: 22px; color: #78839e; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Shadow<span>.</span></h1>
+  <p>Your web portal</p>
+  <form id="search">
+    <input id="url" placeholder="Enter a website..." required>
+    <button type="submit">Go ↗</button>
+  </form>
+  <small>Your portal, your space.</small>
+</main>
+<script>
+document.getElementById("search").onsubmit = function(e) {
+  e.preventDefault();
+  let value = document.getElementById("url").value.trim();
+  if (!/^https?:\/\//i.test(value)) value = "https://" + value;
+  try {
+    const url = new URL(value);
+    if (url.protocol === "https:" || url.protocol === "http:") {
+      window.open(url.href, "_blank", "noopener");
+    }
+  } catch {
+    alert("Enter a valid website address.");
+  }
+};
+</script>
+</body>
+</html>
